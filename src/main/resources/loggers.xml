@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+    <bean id="consoleEventLogger" class="by.bsu.basics.logger.ConsoleEventLogger"/>
+    <bean id="fileEventLogger" class="by.bsu.basics.logger.FileEventLogger" init-method="init">
+        <constructor-arg value="output.txt"/>
+    </bean>
+    <bean id="cacheFileEventLogger" class="by.bsu.basics.logger.CacheFileEventLogger" parent="fileEventLogger"
+          destroy-method="destroy">
+        <constructor-arg value="5"/>
+    </bean>
+    <bean id="combinedEventLogger" class="by.bsu.basics.logger.CombinedEventLogger">
+        <constructor-arg>
+            <list>
+                <ref bean="consoleEventLogger"/>
+                <ref bean="cacheFileEventLogger"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="event" class="by.bsu.basics.entity.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
+    </bean>
+</beans>
