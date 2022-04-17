@@ -1,4 +1,4 @@
-package by.bsu.basics.logger;
+package by.bsu.basics.logger.impl;
 
 import by.bsu.basics.entity.Event;
 
@@ -13,7 +13,7 @@ public class CacheFileEventLogger extends FileEventLogger {
     public CacheFileEventLogger(String fileName, int cacheSize) {
         super(fileName);
         this.cacheSize = cacheSize;
-        cache = new ArrayList<Event>();
+        cache = new ArrayList<>();
     }
 
     public void logEvent(Event event) throws IOException {

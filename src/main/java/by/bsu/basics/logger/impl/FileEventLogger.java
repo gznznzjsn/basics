@@ -1,6 +1,7 @@
-package by.bsu.basics.logger;
+package by.bsu.basics.logger.impl;
 
 import by.bsu.basics.entity.Event;
+import by.bsu.basics.logger.EventLogger;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
